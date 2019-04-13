@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, g
 import sqlite3
 
 PATH = 'db/jobs.sqlite3'
@@ -12,7 +12,7 @@ def open_connection():
     connection.row_factory = sqlite3.Row
     return connection
 
-def execute_sql(sql, values=values(), commit=False, single=False):
+def execute_sql(sql, values=(), commit=False, single=False):
     connection = open_connection()
     cursor = connection.execute(sql, values)
     if commit == True:
